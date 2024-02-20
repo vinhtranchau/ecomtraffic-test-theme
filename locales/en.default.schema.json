@@ -661,6 +661,52 @@
         "name": "Collection list"
       }
     },
+    "card-list": {
+      "name": "Card list",
+      "settings": {
+        "title": {
+          "label": "Heading"
+        },
+        "image_ratio": {
+          "label": "Image ratio",
+          "options__1": {
+            "label": "Adapt to image"
+          },
+          "options__2": {
+            "label": "Portrait"
+          },
+          "options__3": {
+            "label": "Square"
+          },
+          "info": "Add images by editing your collections. [Learn more](https://help.shopify.com/manual/products/collections)"
+        },
+        "columns_desktop": {
+          "label": "Number of columns on desktop"
+        }
+      },
+      "blocks": {
+        "featured_card": {
+          "name": "Card",
+          "settings": {
+            "card": {
+              "title": {
+                "label": "Title"
+              },
+              "description": {
+                "label": "Description"
+              },
+              "link": {
+                "label": "Link Title",
+                "target": "Target Link"
+              }
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Card list"
+      }
+    },
     "contact-form": {
       "name": "Contact Form",
       "presets": {
