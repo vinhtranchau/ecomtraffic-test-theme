@@ -1,0 +1,88 @@
+.feat-card-list-main-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.feat-card-list-main {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+
+.feat-card-list-title {
+  width: 100%;
+  text-align: center;
+  font-size: 80px;
+  line-height: 80px;
+  font-family: GTSuperText;
+}
+
+@media screen and (min-width: 750px) {
+  .feat-card-list-wrap {
+    padding: 40px;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .feat-card-list-wrap {
+    padding: 10px;
+  }
+
+  .feat-card-list-title {
+    font-size: 40px;
+    line-height: 40px;
+  }
+}
+
+.feat-card-wrap {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 30px;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 332px;
+}
+
+.feat-card-image-wrap {
+  width: 312px;
+  height: 224px;
+}
+
+.feat-card-item {
+  display: flex;
+  justify-content: center;
+}
+
+.feat-card-image {
+  object-fit: cover;
+}
+
+.feat-card-content-wrap {
+  text-align: center;
+  padding: 20px;
+}
+
+.feat-card-title {
+  font-size: 32px;
+  line-height: 32px;
+  color: black;
+  font-family: GTSuperText;
+}
+
+.feat-card-description {
+  font-size: 14px;
+  line-height: 18px;
+  color: black;
+  padding: 10px 0px 10px;
+  font-family: GTSuperText;
+}
+
+.feat-card-link {
+  font-size: 12px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: black;
+  font-family: PlatformRegular;
+}

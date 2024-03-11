@@ -1,0 +1,50 @@
+{% comment %}
+  Renders a feature card
+
+  Accepts:
+  - title: {String}
+  - description: {String}
+  - link_text: {String}
+  - target: {String}
+  - card_image: {String}
+  - bg_color: {Color}
+
+  Usage:
+  {% render 'card-feature' %}
+{% endcomment %}
+
+<div class="feat-card-wrap" style="background-color: {{ bg_color }}">
+  <div class="feat-card-image-wrap">
+    <img
+      srcset="
+        {%- if card_image.width >= 165 -%}{{ card_image | image_url: width: 165 }} 165w,{%- endif -%}
+        {%- if card_image.width >= 330 -%}{{ card_image | image_url: width: 330 }} 330w,{%- endif -%}
+        {%- if card_image.width >= 535 -%}{{ card_image | image_url: width: 535 }} 535w,{%- endif -%}
+        {%- if card_image.width >= 750 -%}{{ card_image | image_url: width: 750 }} 750w,{%- endif -%}
+        {%- if card_image.width >= 1000 -%}{{ card_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+        {%- if card_image.width >= 1500 -%}{{ card_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+        {%- if card_image.width >= 3000 -%}{{ card_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+        {{ card_image | image_url }} {{ card_image.width }}w
+      "
+      src="{{ card_image | image_url: width: 1500 }}"
+      alt="{{ title }}"
+      height="224"
+      width="312"
+      loading="lazy"
+      class="feat-card-image"
+    >
+  </div>
+  <div class="feat-card-content-wrap">
+    <div class="feat-card-title">
+      {%- if title != blank -%}
+        {{- title | escape -}}
+      {%- endif -%}
+    </div>
+    <div class="feat-card-description">
+      {%- if description != blank -%}
+        {{- description | strip_html | truncate: 80 -}}
+      {%- endif -%}
+    </div>
+    <a class="feat-card-link" href="{{ target }}">{{ link_text }}</a>
+  </div>
+</div>

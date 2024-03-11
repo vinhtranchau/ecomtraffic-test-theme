@@ -1,0 +1,115 @@
+{{ 'featured-products.css' | asset_url | stylesheet_tag }}
+{{ 'splide.min.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'splide.min.js' | asset_url }}" defer="defer"></script>
+
+<div class="feat_prods--container">
+  <div class="feat_prods--content">
+    <div class="feat_prods--title_wrap">
+      {%- if section.settings.title != blank -%}
+        <h2 class="feat_prods--title_content">
+          {{ section.settings.title }}
+        </h2>
+      {%- endif -%}
+    </div>
+
+    <div class="splide" id="splide-{{ section.id }}">
+      <div class="splide__arrows">
+		<button class="splide__arrow splide__arrow--prev">
+          <svg width="31" height="16" viewBox="0 0 31 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g transform="scale(-1, 1) translate(-31, 0)">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M4.28583 10.3562C5.78915 11.5625 7.38489 13.2686 8.57061 15.2561L9.42939 14.7438C8.17511 12.6413 6.49586 10.8474 4.91168 9.57622C4.11919 8.9403 3.3421 8.42842 2.64428 8.07299C2.59649 8.04865 2.54882 8.02491 2.50129 8.00181C2.54839 7.97907 2.59565 7.9557 2.64302 7.93174C3.341 7.57871 4.1183 7.06961 4.9111 6.43537C6.49592 5.16752 8.1757 3.373 9.43022 1.25472L8.56979 0.745151C7.3843 2.74688 5.78909 4.45236 4.28641 5.6545C3.53546 6.25526 2.8159 6.72366 2.19168 7.03939C1.55339 7.36223 1.06438 7.49994 0.76001 7.49994L0.76001 8.49994C1.06332 8.49994 1.5517 8.63874 2.19042 8.96407C2.81479 9.28208 3.53457 9.75333 4.28583 10.3562Z" fill="black"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M31 8.5L1 8.49999L1 7.49999L31 7.5L31 8.5Z" fill="black"/>
+            </g>
+          </svg>
+		</button>
+		<button class="splide__arrow splide__arrow--next">
+          <svg width="31" height="16" viewBox="0 0 31 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M26.7142 5.64384C25.2109 4.43753 23.6151 2.73144 22.4294 0.743896L21.5706 1.25623C22.8249 3.35869 24.5041 5.15259 26.0883 6.42378C26.8808 7.0597 27.6579 7.57158 28.3557 7.92701C28.4035 7.95135 28.4512 7.97509 28.4987 7.99819C28.4516 8.02093 28.4044 8.0443 28.357 8.06826C27.659 8.42129 26.8817 8.93039 26.0889 9.56463C24.5041 10.8325 22.8243 12.627 21.5698 14.7453L22.4302 15.2548C23.6157 13.2531 25.2109 11.5476 26.7136 10.3455C27.4645 9.74474 28.1841 9.27634 28.8083 8.96061C29.4466 8.63777 29.9356 8.50006 30.24 8.50006V7.50006C29.9367 7.50006 29.4483 7.36126 28.8096 7.03593C28.1852 6.71792 27.4654 6.24668 26.7142 5.64384Z" fill="black"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 7.5L30 7.5L30 8.5L-8.74228e-08 8.5L0 7.5Z" fill="black"/>  
+          </svg>
+		</button>
+      </div>
+      
+      <div class="splide__track">
+        <ul class="splide__list">
+          {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}            
+            <li class="splide__slide">
+              {% render 'card-feat-product',
+                card_product: product,
+                section_id: section.id
+              %}
+			</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+
+    <a
+      href="/collections/all"
+      aria-label="Shop All"
+      class="feat_prods--shop_all"
+    >
+      Shop All
+    </a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var splide = new Splide('.splide', {
+      type: 'loop',
+      perPage: {{ section.settings.products_to_show }},
+      breakpoints: {
+        750: {
+          perPage: 1,
+          padding: '5rem',
+        },
+      },
+      perMove: 1,
+    });
+    
+    splide.mount();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Featured Products",
+      "label": "Title"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 25,
+      "step": 1,
+      "default": 3,
+      "label": "Products to show"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}

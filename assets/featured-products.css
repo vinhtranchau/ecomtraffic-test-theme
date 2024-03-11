@@ -1,0 +1,98 @@
+.feat_prods--container {
+  display: flex;
+  justify-content: center;
+}
+
+.feat_prods--content {
+  width: 100%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  max-width: 1440px;
+}
+
+.feat_prods--title_wrap {
+  width: 100%;
+}
+
+.feat_prods--title_content {
+  font-size: 80px;
+  line-height: 80px;
+  text-align: center;
+  font-family: GTSuperText;
+  color: black;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 749px) {
+  .feat_prods--title_content {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .feat_prods--content {
+    padding: 10px;
+  }
+}
+
+.feat_prods--shop_all {
+  text-transform: uppercase;
+  font-family: PlatformRegular;
+  color: black;
+  padding: 40px;
+  text-align: center;
+}
+
+.feat_prod_card--wrap {
+  margin: 0 1px;
+}
+
+.feat_prod_card--image-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.feat_prod_card--image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.feat_prod_card--content-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: white;
+}
+
+.feat_prod_card--title {
+  flex: 1;
+  font-family: GTSuperTextItalic;
+  font-style: italic;
+  font-size: 24px;
+  color: black;
+}
+
+.feat_prod_card--price {
+  font-size: 14px;
+  font-family: PlatformRegular;
+  color: black;
+}
+
+.splide__track {
+  margin: 0 50px;
+}
+
+@media screen and (max-width: 749px) {
+  .splide__track {
+    margin: 0 0;
+  }
+}
+
+.splide__arrow {
+  background: none !important;
+}
+
+.flipped_arrow {
+  transform: scaleX(-1) !important;
+}

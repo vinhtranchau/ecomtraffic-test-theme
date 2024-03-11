@@ -1,0 +1,44 @@
+{% comment %}
+  Renders a featured product card
+
+  Accepts:
+  - card_product: {Object} Product Liquid object
+  - section_id: {String}
+
+  Usage:
+  {% render 'card-feat-product' %}
+{% endcomment %}
+
+{% if card_product and card_product != empty %}
+  <div class="feat_prod_card--wrap">
+    <div class="feat_prod_card--image-wrap">
+      <img
+        srcset="
+          {%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+          {%- if card_product.featured_media.width >= 360 -%}{{ card_product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+          {%- if card_product.featured_media.width >= 533 -%}{{ card_product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+          {%- if card_product.featured_media.width >= 720 -%}{{ card_product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+          {%- if card_product.featured_media.width >= 940 -%}{{ card_product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+          {%- if card_product.featured_media.width >= 1066 -%}{{ card_product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
+          {{ card_product.featured_media | image_url }} {{ card_product.featured_media.width }}w
+        "
+        src="{{ card_product.featured_media | image_url }}"
+        alt="{{ card_product.featured_media.alt | escape }}"
+        height="224"
+        width="312"
+        loading="lazy"
+        class="feat_prod_card--image"
+      >
+    </div>
+    <div class="feat_prod_card--content-wrap">
+      <div class="feat_prod_card--title">
+        {% if card_product.title != blank %}
+          {{ card_product.title | escape }}
+        {% endif %}
+      </div>
+      <div class="feat_prod_card--price">
+        {{ card_product.price | money }}
+      </div>
+    </div>
+  </div>
+{% endif %}
