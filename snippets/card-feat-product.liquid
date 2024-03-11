@@ -10,7 +10,8 @@
 {% endcomment %}
 
 {% if card_product and card_product != empty %}
-  <div class="feat_prod_card--wrap">
+  <div class="feat_prod_card--wrap" onclick="handleSelect(event)">
+    <div>{{ card_product }}</div>
     <div class="feat_prod_card--image-wrap">
       <img
         srcset="
@@ -28,10 +29,14 @@
         width="312"
         loading="lazy"
         class="feat_prod_card--image"
+        data-product-id="{{ card_product.id }}"
+        data-variant-id="{{ card_product.variants[0].id }}"
       >
     </div>
     <div class="feat_prod_card--content-wrap">
-      <div class="feat_prod_card--title">
+      <div class="feat_prod_card--title"
+        data-product-id="{{ card_product.id }}"
+        data-variant-id="{{ card_product.variants[0].id }}">
         {% if card_product.title != blank %}
           {{ card_product.title | escape }}
         {% endif %}
@@ -42,3 +47,35 @@
     </div>
   </div>
 {% endif %}
+
+<script>
+  const handleSelect = (event) => {
+    console.log(event.target.dataset);
+    var productId = event.target.dataset.productId;
+    var variantId = event.target.dataset.variantId;
+    var quantity = event.target.dataset.quantity || 1; // Default quantity is 1 if not specified
+
+    // Create the form data to submit to the cart endpoint
+    var formData = new FormData();
+    formData.append('id', variantId);
+    formData.append('quantity', quantity);
+
+    // Send a POST request to the cart endpoint to add the item
+    fetch('/cart/add.js', {
+      method: 'POST',
+      body: formData
+    })
+      .then(function(response) {
+        // Handle the response and return the updated cart object
+        return response.json();
+      })
+      .then(function(cart) {
+        // Log the updated cart object to the console
+        console.log('Updated Cart:', cart);
+      })
+      .catch(function(error) {
+        // Handle any errors that occur during the request
+        console.error('Error:', error);
+      });
+  }
+</script>
